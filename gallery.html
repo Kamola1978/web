@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Gallery using Javascript</title>
+	<style type="text/css">
+		*{
+			box-sizing: border-box;
+			font-family: "Arial Narrow";
+			font-size: 12pt;
+		}
+		div.gallery{
+			border: 1px solid #ccc;
+			margin:10px;
+			background-color: white;
+			width: 30%;
+			float:left;
+			box-shadow: 8px 8px 8px #888888;
+		}
+
+		div.gallery:hover{
+			border: 1px solid black;
+			opacity: 60%;
+		}
+
+		div.gallery img{
+			width: 100%;
+			height: auto;
+		}
+		div.description{
+			padding: 10px;
+			text-align: center;
+		}
+		.changeStyle{
+			background-color: black;
+			color: blue;
+		}
+	</style>
+	<script type="text/javascript">
+		function changeStyle(){
+			var body = document.getElementById("body");
+			console.log(body);
+			body.classList.toggle("changeStyle");
+		}	
+	</script>
+</head>
+<body id="body">
+
+<button onclick="changeStyle()">Click to Change Style</button>
+
+<div id="result"></div>
+
+<script type="text/javascript">
+	var galleryItems = '[{"URL":"./img/01.jpg","Caption":"BMW"},{"URL":"./img/02.jpg","Caption":"AUDI"},{"URL":"./img/03.jpg","Caption":"LAMBARGINI"},{"URL":"./img/04.jpg","Caption":"CADILLAC"},{"URL":"./img/05.jpg","Caption":"CHEVROLET"},{"URL":"./img/06.jpg","Caption":"HYUNDAI"},{"URL":"./img/07.jpg","Caption":"NISSAN"},{"URL":"./img/08.jpg","Caption":"FERRARI"},{"URL":"./img/09.jpg","Caption":"TOYOTA"}]';
+	var Items = JSON.parse(galleryItems);
+	console.log(Items);
+	for(var i in Items){
+		var elemGallery = document.createElement("div");
+		elemGallery.classList.add("gallery");
+		var elemA = document.createElement("a");
+		elemA.target = "_blank";
+		elemA.href = Items[i].URL;
+		var elemImg = document.createElement("img");
+		elemImg.src = Items[i].URL;
+		elemImg.alt = Items[i].Caption;
+		elemA.appendChild(elemImg);
+		var elemDescription = document.createElement("div");
+		elemDescription.classList.add("description");
+		elemDescription.innerHTML = "Image " + (+i + 1) + "<br><b>" + Items[i].Caption + "</b>";
+		elemGallery.appendChild(elemA);
+		elemGallery.appendChild(elemDescription);
+		var result = document.getElementById("result");
+		result.appendChild(elemGallery);
+
+	}
+</script>
+</body>
+</html>
